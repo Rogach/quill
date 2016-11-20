@@ -65,7 +65,9 @@ trait ContextMacro extends Quotation {
 
         ProbeStatement(idiom.prepareForProbing(string), c)
 
-        c.info(string)
+        if (!sys.env.contains("QUILL_NO_MACRO_OUTPUT")) {
+          c.info(string)
+        }
 
         q"($normalizedAst, ${statement: Token})"
       case Failure(ex) =>
